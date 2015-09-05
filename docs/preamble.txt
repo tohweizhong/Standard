@@ -1,0 +1,21 @@
+The purpose of this workflow to streamline all analytics done on any structured and relatively clean datasets. Such datasets include Kaggle competitions, mainly on supervised learning only. The dataset used here is the adult dataset, which spot a classification problem.
+
+Models involved are:
+* Logistic regression
+* Naive Bayesian classifier
+* Random forest
+* Extreme gradient boosting
+
+Evaluation metrics are:
+* Accuracy
+* ROC-AUC
+
+Packages involved in this workflow are:
+* caret
+* (Most of the packages involved are interfaced via the caret package)
+
+TODO
+* SMOTE
+* NBC
+* Feature selection
+* Ensembling multiple models
