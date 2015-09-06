@@ -1,5 +1,16 @@
 The purpose of this workflow to streamline all analytics done on any structured and relatively clean datasets. Such datasets include Kaggle competitions, mainly on supervised learning only. The dataset used here is the adult dataset, which spot a classification problem.
 
+
+TODO
+* SMOTE
+* NBC
+* Feature selection
+* Ensembling multiple models
+* Imputation using DMwR pkg
+
+
+
+
 Models involved are:
 * Logistic regression
 * Naive Bayesian classifier
@@ -14,8 +25,22 @@ Packages involved in this workflow are:
 * caret
 * (Most of the packages involved are interfaced via the caret package)
 
-TODO
-* SMOTE
-* NBC
-* Feature selection
-* Ensembling multiple models
+
+Tuning strategy to try out for XGB:
+1) Tune the tree-related parameters first:
+    - min_child_weight
+    - max_depth
+    - colsample_bytree (mtry in RF)
+    - Ignore gamma
+    - This is done by setting a low number of iterations (nrounds), and a moderate eta of 0.1
+2) After getting a series of parameter sets that optimises performance on the tuning set (e.g.  top 10% of the parameters), use them to tune towards the "point of overfit"
+
+@@ Consider the difference between performance for tuning and redundancy
+
+@@ co-write eda.R and preprocess.R
+
+STANDARD-WORKFLOW will be tested on the Titanic challenge on Kaggle
+
+Script structure:
+preprocess -> houseBlend
+           -> 

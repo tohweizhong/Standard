@@ -34,8 +34,9 @@ trainCtrl <- trainControl(method = "cv",
 ### For all other parameters, tune using nested for-loops
 
 tuneGrid.caret <- expand.grid(nrounds = c(15),
-                              max_depth = c(1), # Stumps
-                              eta = c(0.1))
+                              eta = c(0.1),
+                              max_depth = c(1) # Tree stumps
+                              )
 
 ## To set up a watchlist, use xgb.DMatrix
 wl <- xgb.DMatrix(data = sparse.model.matrix(income ~., data = train), label = train.labels)
@@ -79,10 +80,18 @@ for(i in seq(nrow(tuneGrid.manual))){
                            auc(predictor = xgb0.pred.prob, response = tune.labels))
 }
 
+## Tuning performances
+boxplot.stats(tune.performances)
+
+## Set of parameters that optimise performance
+best.param <- which(tune.performances == max(tune.performances))
+tuneGrid.manual[best.param,]
+
 tuneGrid.manual <- cbind(tuneGrid.manual, tune.performances)
 
 ## Now with the optimal set of parameters,
 ## tune towards point of overfit
+## Specifically tuning nrounds and eta
 
 tuneGrid.caret2 <- expand.grid(nrounds = seq(200, 800, by = 100),
                                max_depth = c(1),
@@ -99,9 +108,12 @@ xgb1 <- train(data = train, income ~ .,
               #,silent = 1 # <--- duplicated parameter
               ,nthread = 4
               ## tuning the following:
-              ,min_child_weight = tuneGrid.manual$min_child_weight[70]
-              ,subsample        = tuneGrid.manual$subsample[70]
-              ,colsample_bytree = tuneGrid.manual$colsample_bytree[70]
+              ,min_child_weight = tuneGrid.manual$min_child_weight[best.param]
+              ,subsample        = tuneGrid.manual$subsample[best.param]
+              ,colsample_bytree = tuneGrid.manual$colsample_bytree[best.param]
 )
 plot(xgb1)
 
+## Make predictions on testing set
+xgb1.pred.prob <- predict(xgb1, newdata = test[, -ncol(test)], type = "prob")[,1]
+auc(predictor = xgb1.pred.prob, response = test.labels)

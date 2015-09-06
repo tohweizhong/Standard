@@ -52,7 +52,7 @@ rf0.pred.prob <- predict(rf0, subset(test, select = -income), type = "prob")[,2]
 rf0.pred.class <- predict(rf0, subset(test, select = -income), type = "response")
 print(rf0.pred.conf <- table(rf0.pred.class, test$income))
 print(rf0.acc <- sum(diag((rf0.pred.conf))) / sum(rf0.pred.conf))
-print(rf0.auc <- auc(rf0.pred.prob, test.labels))
+print(rf0.auc <- auc(predictor = rf0.pred.prob, response = test.labels))
 
 ## Other things can be explored for tuning:
 ## @ Max tree depth

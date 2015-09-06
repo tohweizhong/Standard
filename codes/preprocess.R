@@ -1,6 +1,6 @@
 # preprocess.R
 
-# Objectives:
+# Objectives in preprocess step:
 # @ Import data
 # @ Drop columns
 # @ Imputation
@@ -9,12 +9,13 @@
 
 # ====
 
+library(DMwR)
 library(caret)
 
 source("codes/houseblend.R")
 
 df <- read.csv("data/adult.csv", header = T, stringsAsFactors = T, strip.white = T)
-### Response variable should be in the last column
+### Response variable should be in the last column, but not necessary
 
 ## Drop unnecessary columns
 df <- subset(df, select = -fnlwgt)
@@ -29,12 +30,15 @@ df$income <- sapply(df$income, FUN = function(x){
 df$income <- factor(df$income)
 
 
+## Imputation
+df <- knnImputation(df)
+
 ## Converting nominal variables to numerical
 ## (260815: neglecting ordinal variables for now)
 ## Few methods available:
 ## @ One-hot encoding
 ## @ Empirical probabilities (of each class)
-## @ Chi-squared contributions
+## @ Chi-squared contributions (relative to response variable)
 
 ### Use Empirical probabilities here
 factorIdx <- WhichAreFactors(df)

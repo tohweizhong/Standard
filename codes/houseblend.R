@@ -2,7 +2,9 @@
 
 # Houses various functions that are commonly used
 # @ ComputeCEL
-# @ 
+# @ Cate2Prob
+# @ WhichAreFactors
+# @ GenerateSubmission
 
 # Function to compute CEL
 # require a data.frame with the following columns
@@ -24,16 +26,19 @@ ComputeCEL <- function(df){
 }
 
 # example
-foo <- data.frame(rbind(c(1,0.5),c(0, 0.5), c(1, 0.5), c(0, 0.5)))
-ComputeCEL(foo)
+ComputeCEL(data.frame(rbind(c(1,0.5),c(0, 0.5), c(1, 0.5), c(0, 0.5))))
+# this should be 0.30103
 
 
 
-# GenerateSubmission <- function(predictions, filename){
-#     subm <- read.csv('docs/HR_Retention_2013_SampleSubmission.csv')
-#     subm$RESIGNED <- predictions
-#     write.csv(subm, file = paste("submissions/", filename, ".csv", sep = ""), row.names = F)
-# }
+
+# Function to generate a submission file for competitions
+GenerateSubmission <- function(predictions, filename){
+    subm <- read.csv('docs/HR_Retention_2013_SampleSubmission.csv')
+    subm$RESIGNED <- predictions
+    write.csv(subm, file = paste("submissions/", filename, ".csv", sep = ""), row.names = F)
+}
+
 
 
 # Function to convert a categorical variable to numerical,
@@ -58,8 +63,7 @@ Cate2Prob <- function(one.col){
     return(tmp.col)
 }
 
-# Function to identify which columns in a data.frame
-# are factors
+# Function to identify which columns in a data.frame are factors
 WhichAreFactors <- function(df){
     datatypes <- sapply(df, class)
     tmp <- NULL
