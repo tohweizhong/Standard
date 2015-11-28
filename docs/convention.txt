@@ -1,0 +1,32 @@
+CODING CONVENTIONS
+
+Variables (General, e.g. as function arguments)
+* Use periods as delimiter
+* df for data.frame
+* idx for indices (usually rows)
+* tmp, ump, vmp etc. for temporary variables
+* xmp and ymp for temporary variables related to X and Y
+
+Variables (Names in xy-convention)
+* Xtrain and Xtest for original training and testing set, without response variable
+* Ytrain for original response variable in training set (Ytest shouldn't exist)
+* xtrain, xtune, xtest for data partitions within Xtrain
+* ytrain, ytune, ytest: likewise
+
+Variables (Names in non-xy-convention)
+* 
+
+Models (General)
+* Models are indexed by numbers, starting from 0
+* New models with params tweaked are indicated by <model><index>.<parameter><value>, e.g rf1.mtry2, up to 2 parameters only. Anything more than that, write a comment to describe the exact parameter tweak
+
+Products of modeling
+* Predictions are named <model><index>.<pred>.<prob or class> depending on probability or class predictions
+* Submissions are with "subm"
+* Confusion matrices are with "conf"
+* Performances metrics: .acc for accuracy, .auc for ROC-AUC
+
+Functions
+* All functions are to start with caps
+* Functions related to feature engineering start with "Eng"", followed by the name of the variable to be engineered
+* All functions are named using CamelCase (https://en.wikipedia.org/wiki/CamelCase)

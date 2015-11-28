@@ -1,0 +1,32 @@
+
+TODO
+* SMOTE
+* NBC
+* Feature selection
+* Ensembling multiple models
+
+------------------------------
+
+@@ Consider the difference between performance for tuning and redundancy
+
+@@ co-write eda.R and preprocess.R
+
+@@ When doing imputation or converting categorical variables to empirical probabilities, combine training and testing or do separately?
+
+@@ Exhaust one type of model at a time
+
+------------------------------
+
+Tuning strategy to try out for XGB:
+1) Tune the tree-related parameters first:
+    - min_child_weight
+    - max_depth
+    - colsample_bytree (mtry in RF)
+    - Ignore gamma
+    - This is done by setting a low number of iterations (nrounds), and a moderate eta of 0.1
+2) After getting a series of parameter sets that optimises performance on the tuning set (e.g.  top 10% of the parameters), use them to tune towards the "point of overfit"
+
+
+Another strategy:
+1) Tune tree-related parameters and eta first,
+2) Then tune nrounds and eta towards point of overfit

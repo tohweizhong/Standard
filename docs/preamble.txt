@@ -1,46 +1,35 @@
-The purpose of this workflow to streamline all analytics done on any structured and relatively clean datasets. Such datasets include Kaggle competitions, mainly on supervised learning only. The dataset used here is the adult dataset, which spot a classification problem.
+STANDARD-WORKFLOW
 
+----
 
-TODO
-* SMOTE
-* NBC
-* Feature selection
-* Ensembling multiple models
-* Imputation using DMwR pkg
+OBJECTIVE
+The purpose of this workflow to streamline all analytics done on any structured and relatively clean datasets. Such datasets include Kaggle competitions, mainly on supervised learning only.
 
+XY-CONVENTION
+There are two versions of workflow in the repo: one using the xy-convention (xy workflow) and one not (non-xy workflow). The xy-convention refers to the use of variables such as Xtrain and ytest, throughout the workflow. One implication of such a convention is that functions that train the model are mostly to be used in a x = Xtrain, y = Ytrain manner rather than using a formula.
 
+For the xy workflow, the dataset used is the Titanic dataset, from Kaggle. The non-xy workflow uses the adult dataset. Both are classification problems.
 
-
+MODELLING
 Models involved are:
-* Logistic regression
-* Naive Bayesian classifier
-* Random forest
-* Extreme gradient boosting
+* Logistic regression (log)
+* Naive Bayesian classifier (nbc)
+* Random forest (rf)
+* Extreme gradient boosting (xgb)
 
 Evaluation metrics are:
-* Accuracy
-* ROC-AUC
+* Accuracy (acc)
+* ROC-AUC (auc)
+* Cross-entropy loss (cel)
 
+PACKAGES
 Packages involved in this workflow are:
 * caret
+* DMwR
 * (Most of the packages involved are interfaced via the caret package)
 
-
-Tuning strategy to try out for XGB:
-1) Tune the tree-related parameters first:
-    - min_child_weight
-    - max_depth
-    - colsample_bytree (mtry in RF)
-    - Ignore gamma
-    - This is done by setting a low number of iterations (nrounds), and a moderate eta of 0.1
-2) After getting a series of parameter sets that optimises performance on the tuning set (e.g.  top 10% of the parameters), use them to tune towards the "point of overfit"
-
-@@ Consider the difference between performance for tuning and redundancy
-
-@@ co-write eda.R and preprocess.R
-
-STANDARD-WORKFLOW will be tested on the Titanic challenge on Kaggle
-
-Script structure:
-preprocess -> houseBlend
-           -> 
+SCRIPTS
+* preprocess.R: preprocess data and feature engineering
+* houseBlend.R: utility functions
+* <model>.R: respective models, includes tuning, testing etc.
+* preprocess.R will source houseBlend.R, <model>.R's will not source any scripts
