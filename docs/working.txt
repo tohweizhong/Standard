@@ -2,7 +2,7 @@
 TODO
 * SMOTE
 * NBC
-* Feature selection
+* Feature selection	
 * Ensembling multiple models
 
 ------------------------------
