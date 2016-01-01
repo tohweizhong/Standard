@@ -38,6 +38,7 @@ PopList <- function(lst){
 # @ ComputeCEL
 # @ Cate2Prob
 # @ WhichAreFactors
+# @ OneHotEncode
 # @ GenerateSubmission
 
 # Function to compute CEL
@@ -62,6 +63,24 @@ ComputeCEL <- function(df){
 # example
 #ComputeCEL(data.frame(rbind(c(1,0.5),c(0, 0.5), c(1, 0.5), c(0, 0.5))))
 # this should be 0.30103
+
+# Function to generate one-hot encoded variables for all variables in a data.frame
+OneHotEncode <- function(df, type = "train",  yvar){
+    
+    if(type == "train"){
+        y  <- df[, which(colnames(df) == yvar)]
+        df <- df[,-which(colnames(df) == yvar)]
+        
+        mm <- model.matrix(~ 0 + ., data = df)
+        df <- cbind(y, data.frame(mm))
+        colnames(df)[1] <- yvar
+        return(df)
+    }
+    else if(type == "test"){
+        return(data.frame(model.matrix(~ 0 + ., data = df)))
+    }
+    
+}
 
 # Function to generate a submission file for competitions
 GenerateSubmission <- function(predictions, filename, samplefilename){

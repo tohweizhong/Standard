@@ -53,11 +53,16 @@ output: pdf_document
 * Mathematical operations on multiple variables (numerical)
     + Simulate statistical interactions using +, -, / (%), *
     + Bin using <, >, == (binary)
+* Temporal components
+    + Break in days, weekdays, weekends, months, years
+    + Break in quarters
 * Enhancing signal of a single variable (numerical)
     + Compute x^2, x^3, etc.
 * ML-based
     + Include cluster membership from a clustering algorithm as a variable
     + Include PC scores from PCA as a variable
+* Others
+    + Engineer two or three additional variables that is completely random for VI benchmark
 
 ### Specific to response variable
 * Dealing with imbalance (categorical)
