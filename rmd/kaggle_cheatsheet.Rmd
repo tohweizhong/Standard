@@ -95,3 +95,8 @@ output: pdf_document
 + list of cv methods
 + stacking
 + large p small n, large n small p (ARM)
++ types of data (forms, census)
++ which columns have NAs
++ number of NAs per row
++ what to impute for different types of data
++ common variables to be had (classes, ColWithNA etc)

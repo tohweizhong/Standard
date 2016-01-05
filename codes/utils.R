@@ -40,6 +40,7 @@ PopList <- function(lst){
 # @ WhichAreFactors
 # @ OneHotEncode
 # @ GenerateSubmission
+# @ ColsWithNA
 
 # Function to compute CEL
 # require a data.frame with the following columns
@@ -128,6 +129,12 @@ WhichAreFactors <- function(df){
         else tmp <- c(tmp, FALSE)
     }
     return(tmp)
+}
+
+# Function to check which variable has NA
+# Return a vector of logicals indicating whether a variable has NA or not
+ColWithNA <- function(df){
+    return(sapply(df, function(x) any(is.na(x))))
 }
 
 
