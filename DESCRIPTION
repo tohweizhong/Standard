@@ -1,10 +1,10 @@
 Package: STANDARDWORKFLOW
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Let me think about it..
 Version: 0.1
 Date: 2015-11-29
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Toh Wei Zhong
+Maintainer: Toh Wei Zhong <tohweizhong@u.nus.edu>
+Description: Utility functions, modelling frameworks, and a kaggle cheatsheet
+License: Haven't decide
 LazyData: TRUE

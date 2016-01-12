@@ -1,0 +1,21 @@
+
+Utility functions, by categories:
+
+1. Data structures-related
+    @ PushList
+    @ PopList
+2. EDA, data mining, Kaggle
+    @ ComputeCEL
+    @ Cate2Prob
+    @ WhichAreFactors
+    @ OneHotEncode
+    @ GenerateSubmission
+    @ ColsWithNA
+3. Geospatial
+    @ Deg2Rad
+    @ GcdHf
+    @ GcdVif
+    @ Gcd
+
+All function names are to start with caps and use CamelCase
+No periods are to be used
