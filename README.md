@@ -1,2 +1,2 @@
-# STANDARD-WORKFLOW
+# Standard
 My personal data analytics workflow
