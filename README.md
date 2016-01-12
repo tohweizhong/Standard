@@ -1,6 +1,6 @@
 # Standard
 
-Standard workflow for data analytics
+Standard workflow for data analytics (WIP)
 
 To install from github, run the following in R:
 ```
