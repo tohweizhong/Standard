@@ -25,16 +25,9 @@ Cate2Chi <- function(one.col, y){
     chi_sq_contri <- ((observed - expected) ** 2) / expected
     chi_sq_contri <- chi_sq_contri / chi_sq
     
-    sum_across <- NULL
-    for(i in seq(nrow(chi_sq_contri))){
-        sum_across <- c(sum_across, chi_sq_contri[i,1] + chi_sq_contri[i,2])
-    }
-    names(sum_across) <- rownames(tab)
+    sum_across <- rowSums(chi_sq_contri)
     
-    tmp.col <- sapply(one.col, FUN = function(x){
-        idx <- which(names(sum_across) == x)
-        return(sum_across[idx])
-    })
+    tmp.col <- sum_across[one.col]
     
     # check
     if(length(tmp.col) != length(one.col)) stop("Lengths dont tally")
