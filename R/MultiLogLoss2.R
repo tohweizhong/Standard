@@ -1,5 +1,4 @@
 
-
 # function to compute multi class log loss
 # borrowed from MLmetrics::MultiLogLoss
 
