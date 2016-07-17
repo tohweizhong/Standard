@@ -1,11 +1,10 @@
-# quick script to create a wordcloud
+# function to create a wordcloud
 
-library(tm)
-library(wordcloud)
-library(RColorBrewer)
-
-
-createWC <- function(vector, minFreq, scale, toRemove = "", rot.per = .15){
+CreateWC <- function(vector, minFreq, scale, toRemove = "", rot.per = .15){
+    
+    require(tm)
+    require(wordcloud)
+    require(RColorBrewer)
     
     feedback <- vector
     
@@ -22,6 +21,7 @@ createWC <- function(vector, minFreq, scale, toRemove = "", rot.per = .15){
         doc <- gsub("'s", "", doc) 
         return(doc)
     }
+    
     aggregate.plurals <- function (v) {
         aggr_fn <- function(v, singular, plural) {
             if (! is.na(v[plural])) {
@@ -49,30 +49,20 @@ createWC <- function(vector, minFreq, scale, toRemove = "", rot.per = .15){
     feedback.corpus <- tm_map(feedback.corpus, fix_contractions)
     
     
-    #word counts in a matrix
+    # word counts in a matrix
     feedback.corpus <- tm_map(feedback.corpus, PlainTextDocument)
     tdm <- TermDocumentMatrix(feedback.corpus)
     m <- as.matrix(tdm)
     
-    #print(rownames(m))
-    #remove some redundant words
+    # remove words to be removed
     tmp <- NULL
-    for(tr in toRemove){
-        print(tr)
-        tmp <- c(tmp, which(rownames(m) == tr))
+    if(length(toRemove) >= 1 || toRemove != ""){
+        for(tr in toRemove){
+            print(tr)
+            tmp <- c(tmp, which(rownames(m) == tr))
+        }
+        m <- m[-tmp,]
     }
-    #print(tmp)
-    m <- m[-tmp,]
-#     foo<-c(which(rownames(m)=="questions"),
-#            which(rownames(m)=="well"),
-#            which(rownames(m)=="extra"),
-#            which(rownames(m)=="lecturer"),
-#            which(rownames(m)=="gives"),
-#            which(rownames(m)=="lot"))
-#     
-#     m<-m[-foo,]
-#     
-    #str(m)
     
     v <- sort(rowSums(m),decreasing=TRUE)
     v <- aggregate.plurals(v)
@@ -83,7 +73,7 @@ createWC <- function(vector, minFreq, scale, toRemove = "", rot.per = .15){
     #tiff("wordcloud for teach feedback/wordcloud.tiff", width=1280,height=800)
     #wordcloud(d$word, d$freq, min.freq=100)
     
-    wordcloud(d$word,d$freq, scale=scale ,min.freq= minFreq ,max.words=Inf, random.order=T, rot.per=rot.per, colors=pal, vfont=c("sans serif","plain"))
+    wordcloud(d$word, d$freq, scale = scale, min.freq = minFreq, max.words = Inf, random.order = T, rot.per = rot.per, colors = pal, vfont = c("sans serif","plain"))
     #dev.off()
     
 }
