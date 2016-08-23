@@ -8,4 +8,4 @@ library(devtools)
 install_github("tohweizhong/Standard")
 ```
 
-Number of functions currently implemented: 26
+Number of functions currently implemented: 27
