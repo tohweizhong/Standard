@@ -1,13 +1,14 @@
 
 # Function to do stepwise regression based on F-tests
 
-StepRegF<-function(fullMod,alphaEnter=0.05,alphaStay=0.05){
+StepRegF<-function(fullMod,alphaEnter=0.05,alphaStay=0.05, response = ""){
     require(stringr)
     df<-fullMod$model
     
-    #find the response variable
-    response<-str_sub(as.character(fullMod$call[2]),1,1)
-    # only works when the length of the name of the response variable is one!
+    # #find the response variable
+    # response<-str_sub(as.character(fullMod$call[2]),1,1)
+    # # only works when the length of the name of the response variable is one!
+    
     #empty model with beta0 only
     curMod<-lm(df[,response]~1,data=df)
     holdDf<-df[,response] #holdDf holds all variables in curMod
